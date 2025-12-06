@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { protect } = require("../middleware/authMiddleware");
+
 
 const {
     createNote,
@@ -9,9 +11,9 @@ const {
 } = require('../controllers/noteControllers'); 
 
 // Correct routes
-router.post('/', createNote);
-router.get('/', getNotes);
-router.put('/:id', updateNote);
-router.delete('/:id', deleteNote);
+router.get("/", protect, getNotes);
+router.post("/", protect, createNote);
+router.put("/:id", protect, updateNote);
+router.delete("/:id", protect, deleteNote);
 
 module.exports = router;

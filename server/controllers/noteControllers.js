@@ -8,6 +8,7 @@ exports.createNote = async  (req, res) => {
         const note = await Note.create({
             title, 
             content,
+            user: req.user.id 
         });
 
         res.json(note);
@@ -21,13 +22,14 @@ exports.createNote = async  (req, res) => {
 
 // Get all notes
 exports.getNotes = async (req, res) => {
-    try {
-        const notes = await Note.find().sort({createdAt: -1});
-        res.json(notes);
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
-}
+  try {
+    const notes = await Note.find({ user: req.user._id }).sort({ createdAt: -1 });
+    res.json(notes);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 // update a note
 exports.updateNote = async (req, res) => {

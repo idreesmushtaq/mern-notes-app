@@ -33,3 +33,8 @@ server/.env
 # Build files
 client/dist
 
+# Temporary files
+tmp
+temp
+*.tmp
+*.temp
