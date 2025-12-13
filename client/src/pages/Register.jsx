@@ -20,6 +20,7 @@ const Register = () => {
         email,
         password,
       });
+      console.log("Register CLICKED");
 
       login(res.data.token, res.data.user);
       navigate("/");

@@ -55,7 +55,7 @@ export default function Dashboard() {
   const createNote = async () => {
     try {
       const res = await axios.post("http://localhost:5000/api/notes", { 
-        title, content, tags: tags?.split(",").map(t => t.trim()) : [], category, color},
+        title, content, tags: tags?tags.split(",").map(t => t.trim()) : [], category, color},
         {headers: {Authorization: `Bearer ${token}`}}
       );
       setNotes([res.data.note, ...notes]);
@@ -92,7 +92,7 @@ export default function Dashboard() {
   const deleteNote = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/notes/${id}`, {
-        headers: {Authorization: `Bearer ${token}`});
+        headers: {Authorization: `Bearer ${token}`},});
         setNotes(notes.filter(n => n._id !== id));
     } catch (err) { console.error(err);
       
